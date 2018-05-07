@@ -5,6 +5,8 @@ import React,{Component} from 'react'
 import {View, StyleSheet, Text ,ScrollView} from 'react-native'
 import Toast, {DURATION} from 'react-native-easy-toast'
 import LanguageDao, {FLAG_LANGUAGE} from '../expand/dao/LanguageDao'
+import CheckBox from 'react-native-check-box'
+import ArrayUtils from '../util/ArrayUtils'
 export default class CustomKeyPage extends Component {
     static navigationOptions = ({ navigation, screenProps }) => ({
         title: navigation.state.params?navigation.state.params.title:null,
@@ -22,6 +24,7 @@ export default class CustomKeyPage extends Component {
     constructor(props){
         super(props)
         this.languageDao = new LanguageDao(FLAG_LANGUAGE.flag_key)
+        this.changeValues = []
         this.state = {
             dataArray:[]
         }
@@ -31,6 +34,7 @@ export default class CustomKeyPage extends Component {
         return(
             <View style={styles.containers}>
                 <ScrollView contentContainerStyle={styles.scrollStyle}>
+                    {this._renderView()}
 
                 </ScrollView>
                 <Toast ref="toast"/>
@@ -57,12 +61,43 @@ export default class CustomKeyPage extends Component {
             })
     }
     _renderView(){
+
+        if (!this.state.dataArray || this.state.dataArray.length === 0) return null
+        var views=[]
+        let len = this.state.dataArray.length
+        for (let i=0;i<len-1;i+=2){
+            views.push(
+                <View key={i} style={styles.item}>
+                    {this._renderCheckBox(this.state.dataArray[i])}
+                    {this._renderCheckBox(this.state.dataArray[i+1])}
+                    <View style={{position:'absolute',left:10,right:10,bottom:-10, height:1,backgroundColor:'gray'}}/>
+                </View>
+            )
+        }
+        return views;
+    }
+    _renderCheckBox(data){
         return (
-            <Text>{JSON.stringify(this.state.dataArray)}</Text>
+            <CheckBox
+                style={{flex:1,margin:10}}
+                leftText={data.name}
+                isChecked={data.checked}
+                onClick={()=>this._checkClick(data)}
+            ></CheckBox>
         )
     }
-    _save(){
-        alert('save');
+    _checkClick(data){
+        data.checked = !data.checked
+        ArrayUtils.updateArray(this.changeValues,data)
+
+    }
+    _save=()=>{
+        if (this.changeValues && this.changeValues.length > 0 ){
+            this.languageDao.save(this.state.dataArray)
+        }
+        this.props.navigation.goBack()
+
+
     }
     _navigatePress = () => {
         alert('点击headerRight');
@@ -81,8 +116,12 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     scrollStyle:{
-        display:'flex',
         flex:1,
-        backgroundColor:'red'
+        width:375,
+        backgroundColor:'white'
+    },
+    item:{
+        flexDirection:'row',
+        justifyContent:'center'
     }
 });
