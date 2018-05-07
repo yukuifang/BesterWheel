@@ -49,6 +49,7 @@ export default class CustomKeyPage extends Component {
         })
         this._loadData()
     }
+
     _loadData(){
         this.languageDao.fetch()
             .then(result=>{

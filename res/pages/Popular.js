@@ -15,12 +15,38 @@ import {
 }from 'react-native'
 import RepositoryCell from '../Cell/RepositoryCell'
 import DataRepository from '../expand/dao/DataRepository'
+import LanguageDao, {FLAG_LANGUAGE} from '../expand/dao/LanguageDao'
 import ScrollableTabView,{ScrollableTabBar} from 'react-native-scrollable-tab-view'
 const Url = 'https://api.github.com/search/repositories?q='
 const Query = '&sort=stars'
 
 export default class Popular extends Component{
+    constructor(props){
+        super(props)
+        this.languageDao = new LanguageDao(FLAG_LANGUAGE.flag_key)
+        this.state = {
+            languages:[]
+
+        }
+    }
+    componentDidMount() {
+        this._loadLanguage()
+    }
+    _loadLanguage(){
+        this.languageDao.fetch()
+            .then(result=>{
+                console.log(result)
+                this.setState({
+                    languages:result
+                })
+            })
+            .catch(error=>{
+
+            })
+    }
+
     render(){
+        if (this.state.languages.length === 0) return null
         return (
             <View style={styles.container}>
                 <ScrollableTabView
@@ -30,12 +56,13 @@ export default class Popular extends Component{
                     tabBarActiveTextColor="red"
                     tabBarInactiveTextColor="white"
                 >
-                    <TabVC tabLabel="ios">IOS</TabVC>
-                    <TabVC tabLabel="python">android</TabVC>
-                    <TabVC tabLabel="js">android</TabVC>
-                    <TabVC tabLabel="c">android</TabVC>
-                    <TabVC tabLabel="reactNative">android</TabVC>
-                    <TabVC tabLabel="swift">android</TabVC>
+                    {
+                        this.state.languages.map((result,i,arr)=>{
+                            let lan = arr[i]
+                            return lan.checked==true ? <TabVC key={i} tabLabel={lan.name}>{lan.name}</TabVC>: null
+                        })
+                    }
+
                 </ScrollableTabView>
             </View>
 
@@ -74,7 +101,9 @@ class TabVC extends Component{
     }
     componentDidMount() {
         this._loadData()
+
     }
+
     _keyExtractor = (item, index) => index;
 
     // 加载item布局
