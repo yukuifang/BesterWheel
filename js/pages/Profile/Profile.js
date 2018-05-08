@@ -7,8 +7,6 @@ import React,{Component} from 'react'
 import {View, StyleSheet, Text} from 'react-native'
 
 export default class Profile extends Component {
-
-
     render() {
         const {navigate} = this.props.navigation
         return(
@@ -19,6 +17,11 @@ export default class Profile extends Component {
                         navigate('CustomKeyPage',{user:'666'})
                     }}
                 >自定义标签</Text>
+                <Text
+                    onPress={()=>{
+                        navigate('SortKeyPage',{user:'666'})
+                    }}
+                >标签排序</Text>
             </View>
         )
     }

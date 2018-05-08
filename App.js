@@ -7,13 +7,15 @@
 import React, { Component } from 'react'
 import { Platform, StyleSheet, Text, View ,Image,Button,TouchableOpacity} from 'react-native'
 import {StackNavigator,TabNavigator,TabBarBottom} from 'react-navigation'
-import Home from  './res/pages/Home'
-import Nearby from  './res/pages/Nearby'
-import Message from  './res/pages/Message'
-import Profile from './res/pages/Profile'
-import SignIn from  './res/pages/SignIn'
-import Popular from './res/pages/Popular'
-import CustomKeyPage from  './res/pages/CustomKeyPage'
+import Home from './js/pages/Home'
+import Nearby from './js/pages/Nearby'
+import Message from './js/pages/Message'
+import Profile from './js/pages/Profile/Profile'
+import SignIn from './js/pages/SignIn'
+import Popular from './js/pages/Popular'
+import CustomKeyPage from './js/pages/Profile/CustomKeyPage'
+import SortKeyPage from './js/pages/Profile/SortKeyPage'
+import TestComponent from  './Test'
 
 
 const instructions = Platform.select({
@@ -32,7 +34,7 @@ const Tab = TabNavigator(
 
                 tabBarIcon: ({tintColor}) => (
                     <Image
-                        source={require("./res/images/wode.jpg")}
+                        source={require("./js/images/wode.jpg")}
                         style={styles.icon}
                     />
                 ),
@@ -48,7 +50,7 @@ const Tab = TabNavigator(
                 headerTintColor:"white",
                 tabBarIcon: ({tintColor}) => (
                     <Image
-                        source={require("./res/images/wode.jpg")}
+                        source={require("./js/images/wode.jpg")}
                         style={styles.icon}
                     />
                 ),
@@ -60,7 +62,7 @@ const Tab = TabNavigator(
                 tabBarLabel: 'Message',
                 tabBarIcon: ({tintColor}) => (
                     <Image
-                        source={require('./res/images/wode.jpg')}
+                        source={require('./js/images/wode.jpg')}
                         style={ styles.icon}
                     />
                 ),
@@ -72,7 +74,7 @@ const Tab = TabNavigator(
                 tabBarLabel: 'Profile',
                 tabBarIcon: ({tintColor}) => (
                     <Image
-                        source={require("./res/images/wode.jpg")}
+                        source={require("./js/images/wode.jpg")}
                         style={styles.icon}
                     />
                 ),
@@ -104,6 +106,9 @@ const Navigator = StackNavigator(
         },
         CustomKeyPage: {
             screen: CustomKeyPage
+        },
+        SortKeyPage: {
+            screen: SortKeyPage
         }
 
     }

@@ -4,9 +4,9 @@
 import React,{Component} from 'react'
 import {View, StyleSheet, Text ,ScrollView} from 'react-native'
 import Toast, {DURATION} from 'react-native-easy-toast'
-import LanguageDao, {FLAG_LANGUAGE} from '../expand/dao/LanguageDao'
+import LanguageDao, {FLAG_LANGUAGE} from '../../expand/dao/LanguageDao'
 import CheckBox from 'react-native-check-box'
-import ArrayUtils from '../util/ArrayUtils'
+import ArrayUtils from '../../util/ArrayUtils'
 export default class CustomKeyPage extends Component {
     static navigationOptions = ({ navigation, screenProps }) => ({
         title: navigation.state.params?navigation.state.params.title:null,
@@ -68,11 +68,15 @@ export default class CustomKeyPage extends Component {
         let len = this.state.dataArray.length
         for (let i=0;i<len-1;i+=2){
             views.push(
-                <View key={i} style={styles.item}>
-                    {this._renderCheckBox(this.state.dataArray[i])}
-                    {this._renderCheckBox(this.state.dataArray[i+1])}
-                    <View style={{position:'absolute',left:10,right:10,bottom:-10, height:1,backgroundColor:'gray'}}/>
+                <View key={i}>
+                    <View  style={styles.item}>
+                        {this._renderCheckBox(this.state.dataArray[i])}
+                        {this._renderCheckBox(this.state.dataArray[i+1])}
+                    </View>
+                    <View style={styles.line}/>
                 </View>
+
+
             )
         }
         return views;
@@ -96,13 +100,13 @@ export default class CustomKeyPage extends Component {
         if (this.changeValues && this.changeValues.length > 0 ){
             this.languageDao.save(this.state.dataArray)
         }
+        alert('是否保存');
         this.props.navigation.goBack()
 
 
     }
     _navigatePress = () => {
-        alert('点击headerRight');
-        this.refs.toast.show('hello world!')
+
         this.props.navigation.goBack()
 
     }
@@ -112,17 +116,19 @@ export default class CustomKeyPage extends Component {
 const styles = StyleSheet.create({
     containers: {
         flex: 1,
-        backgroundColor: 'yellow',
-        alignItems: 'center',
-        justifyContent: 'center',
+        backgroundColor: 'white',
+
     },
     scrollStyle:{
-        flex:1,
-        width:375,
-        backgroundColor:'white'
+
     },
     item:{
         flexDirection:'row',
         justifyContent:'center'
+    },
+    line:{
+        flex: 1,
+        height: 0.6,
+        backgroundColor: 'darkgray',
     }
 });
