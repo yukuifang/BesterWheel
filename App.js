@@ -5,19 +5,20 @@
  */
 
 import React, { Component } from 'react'
-import { Platform, StyleSheet, Text, View ,Image,Button,TouchableOpacity} from 'react-native'
+import {Platform, StyleSheet, Text, View, Image, Button, TouchableOpacity, DeviceEventEmitter} from 'react-native'
 import {StackNavigator,TabNavigator,TabBarBottom} from 'react-navigation'
 import Home from './js/pages/Home'
 import Nearby from './js/pages/Nearby'
 import Message from './js/pages/Message'
 import Profile from './js/pages/Profile/Profile'
 import SignIn from './js/pages/SignIn'
-import Popular from './js/pages/Popular'
+import Popular from './js/pages/Popular/Popular'
 import CustomKeyPage from './js/pages/Profile/CustomKeyPage'
 import SortKeyPage from './js/pages/Profile/SortKeyPage'
+import Toast,{DURATION} from 'react-native-easy-toast'
 import TestComponent from  './Test'
 
-
+export const ACTION_HOME={A_SHOW_TOAST:'showToast',A_RESTART:'restart',A_THEME:'theme'};
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' +
     'Cmd+D or shake for dev menu',
@@ -117,17 +118,38 @@ const Navigator = StackNavigator(
 export default class App extends Component {
     render() {
         return (
-            <Navigator/>
+            <View style={styles.container}>
+                <Navigator/>
+                <Toast ref={(toast)=>this.toast=toast}/>
+            </View>
+
         );
     }
+    // componentDidMount(){
+    //     super.componentDidMount();
+    //     this.listener = DeviceEventEmitter.addListener('ACTION_HOME',
+    //         (action,params) => this.onAction(action,params));
+    //
+    // }
+    // componentWillUnmount(){
+    //     super.componentWillUnmount();
+    //     if (this.listener) {
+    //         this.listener.remove();
+    //     }
+    // }
+    // onAction(action,params){
+    //     if(ACTION_HOME.A_RESTART===action){
+    //
+    //     }else if(ACTION_HOME.A_SHOW_TOAST===action){
+    //         this.toast.show(params.text,DURATION.LENGTH_LONG);
+    //     }
+    // }
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
+        backgroundColor: '#fff'
     },
     icon:{
         width:20,

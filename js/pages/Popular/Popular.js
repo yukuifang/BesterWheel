@@ -13,10 +13,12 @@ import {
     Image,
     RefreshControl
 }from 'react-native'
-import RepositoryCell from '../Cell/RepositoryCell'
-import DataRepository from '../expand/dao/DataRepository'
-import LanguageDao, {FLAG_LANGUAGE} from '../expand/dao/LanguageDao'
+import RepositoryCell from '../../Cell/RepositoryCell'
+import DataRepository , {FLAG_STORAGE} from '../../expand/dao/DataRepository'
+import LanguageDao, {FLAG_LANGUAGE} from '../../expand/dao/LanguageDao'
 import ScrollableTabView,{ScrollableTabBar} from 'react-native-scrollable-tab-view'
+import Utils from '../../util/Utils'
+var dataRepository = new DataRepository(FLAG_STORAGE.flag_popular)
 const Url = 'https://api.github.com/search/repositories?q='
 const Query = '&sort=stars'
 
@@ -74,7 +76,7 @@ export default class Popular extends Component{
 class TabVC extends Component{
     constructor(props){
         super(props)
-        this.dataRepository = new DataRepository()
+
         this.state = {
             result:[],
             isLoading:false
@@ -122,16 +124,31 @@ class TabVC extends Component{
             isLoading:true
         })
         let url = this.getUrl(this.props.tabLabel)
-        this.dataRepository.fetchNetRepository(url)
-            .then(result=>{
+        dataRepository
+            .fetchRepository(url)
+            .then(result=> {
+                let res = result && result.items ? result.items : result ? result : [];
                 this.setState({
-                    result:result.items,
+                    result: res,
+                    isLoading:false
+                })
+
+                if (result && result.update_date && !Utils.checkDate(result.update_date))return dataRepository.fetchNetRepository(url);
+            })
+            .then((items)=> {
+                if (!items || items.length === 0)return;
+                this.setState({
+                    result: items,
                     isLoading:false
 
                 })
+
             })
-            .catch(error=>{
-                console.log(error)
+            .catch(error=> {
+                console.log(error);
+                this.setState({
+                    isLoading:true
+                })
             })
 
     }

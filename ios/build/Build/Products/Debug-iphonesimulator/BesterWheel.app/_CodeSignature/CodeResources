@@ -6,7 +6,7 @@
 	<dict>
 		<key>Base.lproj/LaunchScreen.nib</key>
 		<data>
-		d4cOln+GA0x4pt2ExvS5U6iJj3g=
+		EXa1mluVBakiV4wJDCLYcQ612m8=
 		</data>
 		<key>Frameworks/IDEBundleInjection.framework/IDEBundleInjection</key>
 		<data>
@@ -51,7 +51,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		jpZZn0xgSTGHxkVmmLYJeS72FHM=
+		dAP4NH1vvDrSe45oZAB7eoCJKvc=
 		</data>
 		<key>PkgInfo</key>
 		<data>
@@ -67,7 +67,7 @@
 		</data>
 		<key>PlugIns/BesterWheelTests.xctest/BesterWheelTests</key>
 		<data>
-		8GTm/SG4X7K1hEaM2HZHTRD4oZs=
+		7j89Ffk91S6L1qac8oLfrFOsc68=
 		</data>
 		<key>PlugIns/BesterWheelTests.xctest/Info.plist</key>
 		<data>
@@ -84,11 +84,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			d4cOln+GA0x4pt2ExvS5U6iJj3g=
+			EXa1mluVBakiV4wJDCLYcQ612m8=
 			</data>
 			<key>hash2</key>
 			<data>
-			9ZBGJlGbdl+Hzh0uYRGA6FulchpCJveh3384iJS5vzE=
+			NiUxM5GimUoT4SPi51nrHjnk3kVuuOGOOLVdZHG1fmA=
 			</data>
 		</dict>
 		<key>Frameworks/IDEBundleInjection.framework/IDEBundleInjection</key>
@@ -218,11 +218,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			8GTm/SG4X7K1hEaM2HZHTRD4oZs=
+			7j89Ffk91S6L1qac8oLfrFOsc68=
 			</data>
 			<key>hash2</key>
 			<data>
-			lB996nB6PMWx3s9yd2h9Gt+dbdwb/nnNYH6zVr+3mhs=
+			mIJ5jIZmwQ9rY3CoZQAawRR7CGv25x+aVOCWCZMWuag=
 			</data>
 		</dict>
 		<key>PlugIns/BesterWheelTests.xctest/Info.plist</key>
