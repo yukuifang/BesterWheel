@@ -11,7 +11,8 @@ import {
     FlatList,
     TouchableOpacity,
     Image,
-    RefreshControl
+    RefreshControl,
+    DeviceEventEmitter
 }from 'react-native'
 import RepositoryCell from '../../Cell/RepositoryCell'
 import DataRepository , {FLAG_STORAGE} from '../../expand/dao/DataRepository'
@@ -133,10 +134,16 @@ class TabVC extends Component{
                     isLoading:false
                 })
 
-                if (result && result.update_date && !Utils.checkDate(result.update_date))return dataRepository.fetchNetRepository(url);
+                if (result && result.update_date && !Utils.checkDate(result.update_date)){
+                    DeviceEventEmitter.emit('ACTION_HOME','showToast',{'text':'数据过期'})
+                    return dataRepository.fetchNetRepository(url)
+                }else {
+                    DeviceEventEmitter.emit('ACTION_HOME','showToast',{'text':'显示本地数据'})
+                }
             })
             .then((items)=> {
                 if (!items || items.length === 0)return;
+                DeviceEventEmitter.emit('ACTION_HOME','showToast',{'text':'显示网络数据'})
                 this.setState({
                     result: items,
                     isLoading:false

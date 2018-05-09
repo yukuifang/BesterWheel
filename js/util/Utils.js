@@ -20,7 +20,7 @@ export default class Utils {
      * @return {boolean} true 不需要更新,false需要更新
      */
     static checkDate(longTime) {
-        return false;
+
         let currentDate = new Date();
         let targetDate = new Date();
         targetDate.setTime(longTime);

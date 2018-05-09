@@ -125,25 +125,28 @@ export default class App extends Component {
 
         );
     }
-    // componentDidMount(){
-    //     super.componentDidMount();
-    //     this.listener = DeviceEventEmitter.addListener('ACTION_HOME',
-    //         (action,params) => this.onAction(action,params));
-    //
-    // }
-    // componentWillUnmount(){
-    //     super.componentWillUnmount();
-    //     if (this.listener) {
-    //         this.listener.remove();
-    //     }
-    // }
-    // onAction(action,params){
-    //     if(ACTION_HOME.A_RESTART===action){
-    //
-    //     }else if(ACTION_HOME.A_SHOW_TOAST===action){
-    //         this.toast.show(params.text,DURATION.LENGTH_LONG);
-    //     }
-    // }
+    componentDidMount(){
+
+        this.listener = DeviceEventEmitter.addListener('ACTION_HOME',
+            (action,params) => {
+
+                this._onAction(action,params)
+            })
+
+    }
+    componentWillUnmount(){
+
+        if (this.listener) {
+            this.listener.remove();
+        }
+    }
+    _onAction(action,params){
+        if(ACTION_HOME.A_RESTART===action){
+
+        }else if(ACTION_HOME.A_SHOW_TOAST===action){
+            this.toast.show(params.text,DURATION.LENGTH_LONG);
+        }
+    }
 }
 
 const styles = StyleSheet.create({
