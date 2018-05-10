@@ -15,6 +15,7 @@ import SignIn from './js/pages/SignIn'
 import Popular from './js/pages/Popular/Popular'
 import CustomKeyPage from './js/pages/Profile/CustomKeyPage'
 import SortKeyPage from './js/pages/Profile/SortKeyPage'
+import KyWebView from './js/pages/Popular/KyWebView'
 import Toast,{DURATION} from 'react-native-easy-toast'
 import TestComponent from  './Test'
 
@@ -110,6 +111,9 @@ const Navigator = StackNavigator(
         },
         SortKeyPage: {
             screen: SortKeyPage
+        },
+        KyWebView:{
+            screen:KyWebView
         }
 
     }

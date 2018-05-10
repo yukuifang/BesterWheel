@@ -62,7 +62,9 @@ export default class Popular extends Component{
                     {
                         this.state.languages.map((result,i,arr)=>{
                             let lan = arr[i]
-                            return lan.checked==true ? <TabVC key={i} tabLabel={lan.name}>{lan.name}</TabVC>: null
+                            return lan.checked==true ? <TabVC key={i} tabLabel={lan.name} itemClick={(item)=>{
+                                this.props.navigation.navigate('KyWebView',{user:'666'})
+                            }}>{lan.name}</TabVC>: null
                         })
                     }
 
@@ -111,8 +113,11 @@ class TabVC extends Component{
 
     // 加载item布局
     _renderItem = ({item}) =>{
+
         return(
-            <RepositoryCell item={item}/>
+            <RepositoryCell item={item} onPressCallBack={()=>{
+                this.props.itemClick(item)
+            }}/>
 
         );
     }

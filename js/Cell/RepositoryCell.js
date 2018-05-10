@@ -18,7 +18,7 @@ export default class RepositoryCell extends PureComponent{
         return (
             <View>
                 <TouchableOpacity
-                    onPress={this._onPress}>
+                    onPress={this.props.onPressCallBack}>
                     <View style={styles.container}>
                         <Text style={{fontSize:18,color:'blue',fontWeight:'bold'}}>{this.props.item.full_name}</Text>
                         <Text style={{fontSize:13}}>{this.props.item.description}</Text>
