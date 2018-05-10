@@ -113,7 +113,6 @@ class TabVC extends Component{
 
     // 加载item布局
     _renderItem = ({item}) =>{
-
         return(
             <RepositoryCell item={item} onPressCallBack={()=>{
                 this.props.itemClick(item)
